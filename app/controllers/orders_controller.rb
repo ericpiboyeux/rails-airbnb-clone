@@ -10,6 +10,7 @@ def create
   @order = Order.new(order_params)
     if @order.save
       redirect_to orders_path(@order)
+      # verifier la route exacte pour la redirection apres save order
     else
       render :new
     end
