@@ -13,11 +13,9 @@
 /* Company Name */
 .company-name {
   text-decoration: none;
-  color: black;
-}
-
-.company-name p {
-  font-size: 1.5em;
+  margin-left: 20px;
+  font-size: 1.3em !important;
+  margin-bottom: 0;
 }
 
 .company-name:hover {
@@ -28,6 +26,7 @@
 .logo-name {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 /* Optional class to fix the navbar on top */
 .navbar-wagon-fixed {
