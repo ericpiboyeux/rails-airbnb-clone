@@ -1,4 +1,4 @@
-class DishesController < ApplicationRecord
+class DishesController < ApplicationController
   def index
   end
   def show
