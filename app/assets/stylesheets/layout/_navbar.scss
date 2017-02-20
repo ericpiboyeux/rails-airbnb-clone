@@ -10,6 +10,25 @@
   justify-content: space-between;
 }
 
+/* Company Name */
+.company-name {
+  text-decoration: none;
+  color: black;
+}
+
+.company-name p {
+  font-size: 1.5em;
+}
+
+.company-name:hover {
+  text-decoration: none !important;
+  color: black !important;
+}
+
+.logo-name {
+  display: flex;
+  justify-content: space-between;
+}
 /* Optional class to fix the navbar on top */
 .navbar-wagon-fixed {
   position: fixed;
