@@ -17,6 +17,19 @@ class DishesController < ApplicationController
   def show
   end
 
+  def new
+    @dish = Dish.new
+  end
+
+  def create
+    @dish = Dish.new(dish_params)
+    if @dish.save
+      redirect_to dishes_path(@dish)
+    else
+      render :new
+    end
+  end
+
   private
 
   def dish_params
