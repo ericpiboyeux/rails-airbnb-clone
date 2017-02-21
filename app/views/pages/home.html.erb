@@ -1,2 +1,7 @@
 <h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%= simple_form_for :search, url: dishes_path, :method => :get do |f| %>
+  <%= f.input :slot, collection: ["Midi", "Soir"], selected: "Midi" %>
+  <%= f.input :date, as: :date %>
+  <%= f.input :address, as: :string %>
+  <%= f.submit "Search", class: "btn btn-primary" %>
+<% end %>
