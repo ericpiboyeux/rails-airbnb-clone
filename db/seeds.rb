@@ -21,36 +21,42 @@ t_index = 0
   user_seed.save!
   # address: "#{Faker::Address.street_address}, #{Faker::Address.city}"
 
-  dish_seed = Dish.new(
-    name: "#{Faker::Food.ingredient} #{Faker::Food.spice}",
-    vegetarian: Faker::Boolean.boolean,
-    gluten_free: Faker::Boolean.boolean,
-    bio: Faker::Boolean.boolean
-  )
-  dish_seed.user = user_seed
-  dish_seed.save!
+  user_dish_number = (0..5).to_a.sample
 
-  hour = [12, 20].sample
-  day = DateTime.now.day + (1..5).to_a.sample
-  zone = DateTime.now.zone
+  user_dish_number.times do
+    dish_seed = Dish.new(
+      name: "#{Faker::Food.ingredient} #{Faker::Food.spice}",
+      vegetarian: Faker::Boolean.boolean,
+      gluten_free: Faker::Boolean.boolean,
+      bio: Faker::Boolean.boolean
+    )
+    dish_seed.user = user_seed
+    dish_seed.save!
 
-  availability_seed = Availability.new(
-    available_datetime: DateTime.new(2017, 02, day, hour, 0, 0, zone),
-    portions: (1..5).to_a.sample
-  )
+    hour = [12, 20].sample
+    day = DateTime.now.day + (1..5).to_a.sample
+    zone = DateTime.now.zone
 
-  availability_seed.dish = dish_seed
-  availability_seed.save!
+    availability_seed = Availability.new(
+      available_datetime: DateTime.new(2017, 02, day, hour, 0, 0, zone),
+      portions: (1..5).to_a.sample
+    )
 
-  availability_seed.portions > 1 ? p_mod =  1 : p_mod = 0
+    availability_seed.dish = dish_seed
+    availability_seed.save!
 
-  order_seed = Order.new(
-    portions: availability_seed.portions - p_mod,
-    review_description: Faker::Lorem.sentence(5),
-    review_rating: (0..5).to_a.sample
-  )
+    if rand < 0.3
+      availability_seed.portions > 1 ? p_mod =  1 : p_mod = 0
 
-  order_seed.user = user_seed
-  order_seed.availability = availability_seed
-  order_seed.save!
+      order_seed = Order.new(
+        portions: availability_seed.portions - p_mod,
+        review_description: Faker::Lorem.sentence(5),
+        review_rating: (1..5).to_a.sample
+      )
+
+      order_seed.user = user_seed
+      order_seed.availability = availability_seed
+      order_seed.save!
+    end
+  end
 end
