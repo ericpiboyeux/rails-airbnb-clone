@@ -2,19 +2,15 @@
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
       <h1>New dish</h1>
-
-      <%= simple_form_for(@cocktail) do |f| %>
+      <%= simple_form_for(@dish) do |f| %>
         <%= f.input :name, label: 'Add New Dish', placeholder: "new dish" %>
         <%= f.input :description, label: 'Description' %>
         <%= f.input :gluten_free, inline_label: 'Yes, it is' %>
+        <%= f.input :vegetarian, inline_label: 'Yes, it is' %>
+        <%= f.input :bio, inline_label: 'Yes, it is' %>
         <%= f.input :photo, as: :attachinary %>
         <%= f.button :submit, class: "btn btn-primary"  %>
       <% end %>
-
-
-
-
-
     </div>
   </div>
 </div>
