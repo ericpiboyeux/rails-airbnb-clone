@@ -1,1 +1,46 @@
 // Your footer style
+.footer-lunchbox {
+  box-shadow: 0 -1px 0 0 rgba(0,0,0,0.03), 0 -1px 5px 0 rgba(0,0,0,0.07);
+  background: white;
+  display: flex;
+  height: 70px;
+  padding: 0px 30px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-data ul li {
+  list-style: none;
+  display: inline;
+}
+
+.footer-data ul {
+  display: inline;
+}
+
+.social-links {
+   display: inline;
+}
+
+.logo-name {
+ display: flex;
+ align-items: space-between;
+}
+
+.navbar-wagon-link:hover{
+  color: #B5E2FA !important;
+}
+
+.footer-img  {
+  img {
+    width: 30px;
+  }
+}
+
+.footer-cpy-name {
+  margin-bottom: 0;
+}
+
+.footer-link:hover{
+
+}
