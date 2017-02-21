@@ -1,4 +1,5 @@
 class DishesController < ApplicationController
+
   skip_before_action :authenticate_user!, only: [:search, :index, :show]
 
   def index
@@ -10,15 +11,29 @@ class DishesController < ApplicationController
     end
 
     @dishes = Dish.joins(:availabilities, :user).where("availabilities.availability_datetime = #{@datetime} and users.address LIKE '%#{params[:search][:address]}%'")
-     byebug
-    puts @dishes_results
-    redirect_to root_path
+    redirect_to dishes_path
   end
+
   def show
   end
+
+  def new
+    @dish = Dish.new
+  end
+
+  def create
+    @dish = Dish.new(dish_params)
+    if @dish.save
+      redirect_to dishes_path
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def dish_params
+    params.require(:dish).permit(:name, :description, :gluten_free, :vegetarian, :bio, :user_id, :photo)
+  end
+
 end
-
-#
-
-
-
