@@ -1,6 +1,6 @@
     $('#mydatepicker').datepicker({
-        startDate: "1d",
-        language: "fr",
-        format: "dd/mm/yyyy",
-        endDate: "7d"
+        startDate: 'today',
+        language: 'fr',
+        format: 'dd/mm/yyyy',
+        endDate: '+7d'
     });
