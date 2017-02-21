@@ -1,1 +1,21 @@
 @import "home";
+
+.card-result {
+  background-image: url('http://img.fac.pmdstatic.net/fit/http.3A.2F.2Fwww.2Efemmeactuelle.2Efr.2Fvar.2Ffemmeactuelle.2Fstorage.2Fimages.2Fcuisine.2Frecettes.2Fpiperade-a-l-oeuf-06883.2F13603483-1-fre-FR.2Fpiperade-a-l-oeuf.2Ejpg/734x367/crop-from/center/piperade-a-l-oeuf.jpg');
+  color: white;
+  border-radius: 4px;
+  height: 200px;
+  padding: 10px;
+}
+
+.mini-profile {
+  position: relative;
+  left: 50px;
+}
+
+
+.search-bar {
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  height: 50px;
+  margin-bottom: 20px;
+}
