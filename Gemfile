@@ -17,6 +17,11 @@ gem 'simple_form'
 gem 'autoprefixer-rails'
 gem 'devise'
 
+
+source "https://rails-assets.org" do
+  gem 'rails-assets-bootstrap-datepicker'
+end
+
 gem 'omniauth-facebook'
 
 gem "cloudinary", "1.1.0"
