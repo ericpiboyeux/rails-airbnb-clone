@@ -11,7 +11,7 @@ class DishesController < ApplicationController
     end
 
     @dishes = Dish.joins(:availabilities, :user).where("availabilities.availability_datetime = #{@datetime} and users.address LIKE '%#{params[:search][:address]}%'")
-    redirect_to root_path
+    redirect_to dishes_path
   end
 
   def show
@@ -24,7 +24,7 @@ class DishesController < ApplicationController
   def create
     @dish = Dish.new(dish_params)
     if @dish.save
-      redirect_to dishes_path(@dish)
+      redirect_to dishes_path
     else
       render :new
     end
