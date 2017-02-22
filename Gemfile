@@ -16,10 +16,12 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 gem 'devise'
-
+gem "geocoder"
+gem "gmaps4rails"
 
 source "https://rails-assets.org" do
   gem 'rails-assets-bootstrap-datepicker'
+  gem "rails-assets-underscore"
 end
 
 gem 'omniauth-facebook'
