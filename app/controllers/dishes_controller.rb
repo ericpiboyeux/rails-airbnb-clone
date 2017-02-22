@@ -3,9 +3,10 @@ class DishesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:search, :index, :show]
 
   def index
+    byebug
     zone = DateTime.now.zone
     if params[:search][:slot] == 'Midi'
-      @datetime = DateTime.parse(params[:search][:date] +  " 12:00")
+      @datetime = DateTime.parse(params[:search][:date] +  " 12:00 UTC +00:00")
     else
       @datetime = DateTime.new(params[:search]["date(1i)"].to_i,params[:search]["date(2i)"].to_i,params[:search]["date(3i)"].to_i, 20,0,0, zone)
     end
