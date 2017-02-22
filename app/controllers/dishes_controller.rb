@@ -10,8 +10,7 @@ class DishesController < ApplicationController
       @datetime = DateTime.parse(params[:search][:date] +  " 20:00")
     end
 
-    @dishes = Dish.joins(:availabilities, :user).where("availabilities.availability_datetime = #{@datetime} and users.address LIKE '%#{params[:search][:address]}%'")
-    #redirect_to dishes_path
+    @dishes = Dish.joins(:availabilities, :user).where("availabilities.available_datetime = ?  and users.address LIKE ? ", @datetime, "%#{params[:search][:address]}%")
   end
 
   def show
