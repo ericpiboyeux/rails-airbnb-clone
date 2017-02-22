@@ -50,3 +50,11 @@
 .footer-link:hover{
 
 }
+
+@media screen and (max-width: 728px) {
+  .footer-data {
+    display: none;
+  }
+
+}
+

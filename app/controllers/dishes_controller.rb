@@ -5,7 +5,7 @@ class DishesController < ApplicationController
   def index
     #zone = DateTime.now.zone
     if params[:search][:slot] == 'Midi'
-      @datetime = DateTime.parse(params[:search][:date] +  " 12:00")
+      @datetime = DateTime.parse(params[:search][:date] +  " 12:00 UTC +00:00")
     else
       @datetime = DateTime.parse(params[:search][:date] +  " 20:00")
     end
