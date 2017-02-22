@@ -11,8 +11,6 @@
 
 <div class="dishPrice">5 €</div>
 
-
-
 <% if @dish.bio == true %>
   <div class="dishBio">
     <span class="label label-success">Bio</span>
@@ -30,6 +28,10 @@
     <span class="label label-success">Vegetarian</span>
   </div>
 <% end %>
+
+<div>Other availabilities</div>
+
+<div>Reviews</div>
 
 <%= simple_form_for :order, url: orders_path, :method => :post do |f| %>
         <%= f.input :portions, collection: 1..@chosen.portions %>
