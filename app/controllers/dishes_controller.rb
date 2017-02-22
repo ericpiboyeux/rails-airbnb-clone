@@ -4,13 +4,15 @@ class DishesController < ApplicationController
 
   def index
     zone = DateTime.now.zone
-    if params[:search][:slot] == 'Midi'
-      @datetime = DateTime.parse(params[:search][:date] +  " 12:00")
+    @params = search_params
+    if @params[:slot] == 'Midi'
+      @datetime = DateTime.parse(@params[:date] +  " 12:00")
+      #byebug
     else
-      @datetime = DateTime.new(params[:search]["date(1i)"].to_i,params[:search]["date(2i)"].to_i,params[:search]["date(3i)"].to_i, 20,0,0, zone)
+      #@datetime = DateTime.new(search_params[:search]["date(1i)"].to_i,params[:search]["date(2i)"].to_i,params[:search]["date(3i)"].to_i, 20,0,0, zone)
     end
 
-    @dishes = Dish.joins(:availabilities, :user).where("availabilities.availability_datetime = #{@datetime} and users.address LIKE '%#{params[:search][:address]}%'")
+    @dishes = Dish.joins(:availabilities, :user).where("availabilities.availability_datetime = #{@datetime} and users.address LIKE '%#{@params[:address]}%'")
     redirect_to dishes_path
   end
 
@@ -34,6 +36,10 @@ class DishesController < ApplicationController
 
   def dish_params
     params.require(:dish).permit(:name, :description, :gluten_free, :vegetarian, :bio, :user_id, :photo)
+  end
+
+  def search_params
+    params.require(:search).permit(:date, :slot, :address)
   end
 
 end
