@@ -1,6 +1,6 @@
 class DishesController < ApplicationController
 
-  skip_before_action :authenticate_user!, only: [:search, :index, :show]
+  skip_before_action :authenticate_user!, only: [:search, :index, :show, :create, :new]
 
   def index
     zone = DateTime.now.zone
