@@ -10,7 +10,18 @@ class DishesController < ApplicationController
       @datetime = DateTime.parse(params[:search][:date] +  " 20:00")
     end
 
-    @dishes = Dish.joins(:availabilities, :user).where("availabilities.available_datetime = ?  and users.address LIKE ? ", @datetime, "%#{params[:search][:address]}%")
+    @dishes = Dish.joins(:availabilities, :user)
+              .where("availabilities.available_datetime = ?  and users.address LIKE ? ", @datetime, "%#{params[:search][:address]}%")
+
+    @users = []
+    @dishes.each do |dish|
+      @users <<  dish.user  if dish.user.latitude && dish.user.longitude
+    end
+    @hash = Gmaps4rails.build_markers(@users) do |user, marker|
+      marker.lat user.latitude
+      marker.lng user.longitude
+      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
+    end
   end
 
   def show
