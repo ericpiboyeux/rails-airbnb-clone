@@ -14,7 +14,12 @@ class DishesController < ApplicationController
   end
 
   def show
-
+    # @dish for TEST use only
+    @dish = Dish.find(1)
+    @chosen = Dish.find(1).availabilities.first
+    # replace it with => @dish = Dish.find(dish_params)
+    @chosen_availability = format_datetime(@chosen.available_datetime)
+    #@other = Dish.find(1).availabilities.to_a.delete(chosen)
   end
 
   def new
@@ -34,6 +39,11 @@ class DishesController < ApplicationController
 
   def dish_params
     params.require(:dish).permit(:name, :description, :gluten_free, :vegetarian, :bio, :photo)
+  end
+
+  def format_datetime(datetime)
+    datetime.hour == 12 ? lunch = "Midi" : lunch = "Soir"
+    return "#{datetime.day}/#{datetime.month}/#{datetime.year}, #{lunch}"
   end
 
 end

@@ -1,0 +1,40 @@
+
+<div class="chosenAvailability">Créneau sélectionné : <%=@chosen_availability%></div>
+
+<div class="dishName"><%= @dish.name %></div>
+
+<div class="dishDescription"><%= @dish.description %></div>
+
+<div class="dishPhoto">
+<%=image_tag "dishes/dish_photo" %>
+</div>
+
+<div class="dishPrice">5 €</div>
+
+<% if @dish.bio == true %>
+  <div class="dishBio">
+    <span class="label label-success">Bio</span>
+  </div>
+<% end %>
+
+<% if @dish.gluten_free == true %>
+  <div class="dishGluten">
+    <span class="label label-success">Gluten</span>
+  </div>
+<% end %>
+
+<% if @dish.vegetarian == true %>
+  <div class="dishVegetarian">
+    <span class="label label-success">Vegetarian</span>
+  </div>
+<% end %>
+
+<div>Other availabilities</div>
+
+<div>Reviews</div>
+
+<%= simple_form_for :order, url: orders_path, :method => :post do |f| %>
+        <%= f.input :portions, collection: 1..@chosen.portions %>
+        <%= f.button :submit, value: "Place order", class: "btn btn-primary"  %>
+<% end %>
+
