@@ -1,11 +1,4 @@
 @import "home";
-
-* {
-  color: #616668;
-  font-size: 14px;
-  font-family: "Open Sans", "Helvetica", "sans-serif";
-}
-
 .chosen-availability {
   background-color: #85CFF7;
   width: 100%;
@@ -33,4 +26,8 @@
 .wrapper-show {
   display: flex;
   align-items: center;
+  color: #616668;
+  font-size: 14px;
+  font-family: "Open Sans", "Helvetica", "sans-serif";
 }
+
