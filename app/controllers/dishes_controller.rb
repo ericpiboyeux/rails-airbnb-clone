@@ -14,6 +14,7 @@ class DishesController < ApplicationController
   end
 
   def show
+
   end
 
   def new
