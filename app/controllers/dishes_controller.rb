@@ -15,8 +15,8 @@ class DishesController < ApplicationController
 
   def show
     # @dish for TEST use only
-    @dish = Dish.find(1)
-    @chosen = Dish.find(1).availabilities.first
+    @dish = Dish.find(params[:id])
+    @chosen = Dish.find(params[:id]).availabilities.first
     # replace it with => @dish = Dish.find(dish_params)
     @chosen_availability = format_datetime(@chosen.available_datetime)
     #@other = Dish.find(1).availabilities.to_a.delete(chosen)

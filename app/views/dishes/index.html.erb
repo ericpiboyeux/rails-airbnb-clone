@@ -8,24 +8,26 @@
         <div class="row">
         <% @dishes.each do |dish|%>
           <div class="col-lg-6 col-xs-12">
-            <div class="card-result">
-              <p> <%= dish.name %>
-              </p>
+            <%= link_to dish_path(dish.id) do %>
+              <div class="card-result">
+                <p> <%= dish.name %>
+                </p>
 
-              <div class="mini-profile">
-                <img src="https://avatars0.githubusercontent.com/u/15861461?v=3&s=400" class="avatar-large">
-                <div class="rating">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star-o" aria-hidden="true"></i>
+                <div class="mini-profile">
+                  <img src="https://avatars0.githubusercontent.com/u/15861461?v=3&s=400" class="avatar-large">
+                  <div class="rating">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <div class="price-card">
+                  2€
                 </div>
               </div>
-              <div class="price-card">
-                2€
-              </div>
-            </div>
+            <% end %>
           </div>
           <% end %>
         </div>
