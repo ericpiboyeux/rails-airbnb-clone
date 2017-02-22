@@ -1,0 +1,36 @@
+@import "home";
+
+* {
+  color: #616668;
+  font-size: 14px;
+  font-family: "Open Sans", "Helvetica", "sans-serif";
+}
+
+.chosen-availability {
+  background-color: #85CFF7;
+  width: 100%;
+  color: white;
+  height: 40px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.label-success {
+  background-color: #FF7B6E;
+  border-color: #FF7B6E;
+}
+
+.main-content {
+  width: 60%;
+}
+
+.side-choice {
+  width: 30%;
+  border: solid 1px #616668;
+  padding: 5px;
+}
+
+.wrapper-show {
+  display: flex;
+  align-items: center;
+}
