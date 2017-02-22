@@ -4,7 +4,7 @@
       <h1>New dish</h1>
 
       <%= simple_form_for(@dish) do |f| %>
-        <%= f.input :name, label: 'Add New Dish', placeholder: "new dish" %>
+        <%= f.input :name, label: 'Add New Dish', required: true, placeholder: "new dish" %>
         <%= f.input :description, label: 'Description' %>
         <%= f.input :gluten_free, inline_label: 'it is Gluten Free' %>
         <%= f.input :vegetarian, inline_label: 'it is vegetarian' %>

@@ -44,6 +44,7 @@ last_name_array = ["pon","du","pierre","doen","fran","sen","dieu","petit"]
   user_dish_number.times do
     dish_seed = Dish.new(
       name: "#{Faker::Food.ingredient} #{Faker::Food.spice}",
+      description: Faker::Lorem.sentence(4),
       vegetarian: Faker::Boolean.boolean,
       gluten_free: Faker::Boolean.boolean,
       bio: Faker::Boolean.boolean
