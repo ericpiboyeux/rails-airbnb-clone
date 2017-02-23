@@ -1,15 +1,41 @@
 <div class="home-wrapper">
   <div class="overlay">
+  <div class="slogan">
+    <h1>
+      LunchBox
+    </h1>
+    <p>Votre repas maison à 2 pas de chez vous</p>
+  </div>
     <div class="form-card">
-      <%= simple_form_for :search, url: dishes_path, :method => :get do |f| %>
-        <div class="top-form">
-          <%= f.input :date, input_html: {id: "mydatepicker"}, required: false %>
-          <%= f.input :slot, collection: ["Midi", "Soir"], selected: "Midi", required: false %>
+      <div class="container">
+        <div class="row form-home">
+          <%= simple_form_for :search, url: dishes_path, :method => :get, :class => "form-inline" do |f| %>
+            <div class="col-lg-3 col-sm-6 form-group">
+              <%= f.input :date, input_html: {id: "mydatepicker"}, required: false %>
+            </div>
+            <div class="col-lg-3 col-sm-6 form-group">
+              <% Time.now.hour > 14 ? slot = "Soir" : slot = "Midi" %>
+              <%= f.input :slot, collection: ["Midi", "Soir"], selected: slot, required: false %>
+            </div>
+            <div class="col-lg-3 col-sm-6 form-group">
+            <%= f.input :address, as: :string, input_html: {id: "address"}, required: false, autocomplete: "off" %>
+            </div>
+            <div class="col-lg-3 col-sm-6 form-group">
+              <%= f.submit "Search", class: "btn btn-primary" %>
+            </div>
+          <% end %>
         </div>
-        <%= f.input :address, as: :string, required: false %>
-        <%= f.submit "Search", class: "btn btn-primary" %>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
+<%= content_for(:after_js) do %>
+  <script>
+    function initialize() {
 
+var input = document.getElementById('address');
+var autocomplete = new google.maps.places.Autocomplete(input);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+<% end %>
