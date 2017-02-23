@@ -1,15 +1,15 @@
 <div class="home-wrapper">
   <div class="overlay">
     <div class="form-card">
-    <%= simple_form_for :search, url: dishes_path, :method => :get do |f| %>
-    <div class="top-form">
-      <%= f.input :slot, collection: ["Midi", "Soir"], selected: "Midi", required: false %>
-      <%= f.input :date, input_html: {id: "mydatepicker"}, required: false %>
+      <%= simple_form_for :search, url: dishes_path, :method => :get do |f| %>
+        <div class="top-form">
+          <%= f.input :date, input_html: {id: "mydatepicker"}, required: false %>
+          <%= f.input :slot, collection: ["Midi", "Soir"], selected: "Midi", required: false %>
+        </div>
+        <%= f.input :address, as: :string, required: false %>
+        <%= f.submit "Search", class: "btn btn-primary" %>
+      <% end %>
     </div>
-      <%= f.input :address, as: :string, required: false %>
-      <%= f.submit "Search", class: "btn btn-primary" %>
-    <% end %>
   </div>
 </div>
-  </div>
 
