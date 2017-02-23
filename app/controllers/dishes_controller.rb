@@ -3,18 +3,38 @@ class DishesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:search, :index, :show, :create, :new]
 
   def index
-    #zone = DateTime.now.zone
-    if params[:search][:slot] == 'Midi'
-      @datetime = DateTime.parse(params[:search][:date] +  " 12:00 UTC +00:00")
-    else
-      @datetime = DateTime.parse(params[:search][:date] +  " 20:00")
+
+    @searched_date = params[:search][:date]
+    @searched_slot = params[:search][:slot]
+    @searched_address = params[:search][:address]
+    @searched_portions = params[:search][:portions]
+    @searched_sentence = params[:search][:sentence]
+
+    # if @searched_address
+    #   @searched_coordinates = Geocoder.search(@searched_address).first
+    #   byebug
+    # end
+
+    if @searched_sentence.present?
+      searched_words = @searched_sentence.split(" ")
+      like_search = "%"
+      searched_words.each do |word|
+        like_search += "#{word}%"
+      end
     end
 
+    if @searched_date.present?
+      if @searched_slot == 'Midi'
+        @datetime = DateTime.parse(@searched_date +  " 12:00 UTC +00:00")
+      elsif @searched_slot == 'Soir'
+        @datetime = DateTime.parse(@searched_date +  " 20:00 UTC +00:00")
+      end
+    end
 
-
-    @dishes = Dish.joins(:availabilities, :user)
-              .where("availabilities.available_datetime = ?  and users.address LIKE ? ", @datetime, "%#{params[:search][:address]}%")
-
+    @dishes = Dish.joins(:availabilities)
+    @dishes = @dishes.where("availabilities.available_datetime = ? ", @datetime) if @datetime
+    @dishes =  @dishes.where("dishes.description LIKE ? ", like_search) if @searched_sentence.present?
+    @dishes = @dishes.where("availabilities.left_portions >= ? ", @searched_portions) if @searched_portions.present?
 
     @users = []
     @dishes.each do |dish|
