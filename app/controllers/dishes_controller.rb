@@ -12,7 +12,7 @@ class DishesController < ApplicationController
 
 
 
-    @dishes = Dish.joins(:availabilities, :user, :orders)
+    @dishes = Dish.joins(:availabilities, :user)
               .where("availabilities.available_datetime = ?  and users.address LIKE ? ", @datetime, "%#{params[:search][:address]}%")
 
 
