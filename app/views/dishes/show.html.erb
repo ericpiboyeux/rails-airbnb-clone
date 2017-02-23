@@ -34,7 +34,7 @@
   </div>
 
   <div class="side-choice">
-    <%= simple_form_for :order, url: orders_path, :method => :post do |f| %>
+    <%= simple_form_for :order, url: orders_new_path, :method => :get do |f| %>
             <%= f.input :portions, collection: 1..@chosen.portions %>
             <%= f.button :submit, value: "Place order", class: "btn btn-primary"  %>
     <% end %>
