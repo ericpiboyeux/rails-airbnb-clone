@@ -24,58 +24,135 @@ address_array = ["248 Rue du Jardin public, 33300 Bordeaux",
   "40 Rue Armand Dulamon, 33300 Bordeaux",
   "12 Rue Vieillard, 33300 Bordeaux"
 ]
-first_name_array = ["Marie","Jean","Laurence","Karine","André","Anne","Jane"]
+
+first_name_array = ["Marie","Laurence","Karine","Anne","Jeanne","Julie","Jean","André","Pierre","Charles"]
 last_name_array = ["pon","du","pierre","doen","fran","sen","dieu","petit"]
 
-15.times do
+user_photo_array = ["http://res.cloudinary.com/erwannddlv/image/upload/v1487856990/woman4_lhs5z6.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487856987/woman5_fock3f.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487856987/woman1_qtzyrr.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487856987/woman2_r7gisj.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487856986/woman6_hmw7yc.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487856986/woman3_usrnqi.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487856985/man2_d3zirk.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487856985/man3_f0jcnj.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487856985/man4_e6uvak.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487856985/man1_zwmfrz.jpg"]
+
+dish_photo_array = ["http://res.cloudinary.com/erwannddlv/image/upload/v1487851870/blanquette_szevkn.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487856985/soupe-thai_y590f6.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487851872/salade_grecque_wnli7w.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487851872/steack_frites_fpaibb.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487851872/salade_lyonnaise_u0vzzt.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487851872/rognons_kxyvum.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487851871/pates_au_pesto_zljufp.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487851871/pates_dbz7kp.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487851871/jambon_crudite%CC%81s_nflklh.jpg",
+"http://res.cloudinary.com/erwannddlv/image/upload/v1487851871/croque_monsieur_gwqys2.jpg"]
+
+dish_attributes = [
+  {name: "Blaquette de veau",
+    vegetarian: false,
+    gluten_free: false,
+    bio: false,
+    price: 6},
+  {name: "Soupe Thaï",
+    vegetarian: false,
+    gluten_free: false,
+    bio: false,
+    price: 4},
+  {name: "Salade grecque",
+    vegetarian: false,
+    gluten_free: false,
+    bio: false,
+    price: 5},
+  {name: "Steack frites",
+    vegetarian: false,
+    gluten_free: false,
+    bio: false,
+    price: 6},
+  {name: "Salade Lyonnaise",
+    vegetarian: false,
+    gluten_free: false,
+    bio: false,
+    price: 5},
+  {name: "Rognons",
+    vegetarian: false,
+    gluten_free: false,
+    bio: false,
+    price: 7},
+  {name: "Pâtes au pesto",
+    vegetarian: false,
+    gluten_free: false,
+    bio: false,
+    price: 6},
+  {name: "Pâtes",
+    vegetarian: false,
+    gluten_free: false,
+    bio: false,
+    price: 5},
+  {name: "Sandwich jambon crudité",
+    vegetarian: false,
+    gluten_free: false,
+    bio: false,
+    price: 3},
+  {name: "Croque-Monsieur",
+    vegetarian: false,
+    gluten_free: false,
+    bio: false,
+    price: 4}]
+
+10.times do
   user_seed = User.new(
-    firstname: first_name_array.sample,
+    firstname: first_name_array[t_index],
     lastname: (last_name_array.sample + last_name_array.sample).capitalize,
     address: address_array[t_index],
     email: "test#{t_index + 1}@gmail.com",
     password: "password"
   )
+  user_seed.photo_url = user_photo_array[t_index]
   user_seed.save!
-  t_index += 1
-  # address: "#{Faker::Address.street_address}, #{Faker::Address.city}"
 
-  user_dish_number = (0..5).to_a.sample
-
-  user_dish_number.times do
     dish_seed = Dish.new(
-      name: "#{Faker::Food.ingredient} #{Faker::Food.spice}",
-      description: Faker::Lorem.sentence(4),
-      vegetarian: Faker::Boolean.boolean,
-      gluten_free: Faker::Boolean.boolean,
-      bio: Faker::Boolean.boolean
+    name: dish_attributes[t_index][:name],
+    description: Faker::Lorem.sentence(4),
+    vegetarian: dish_attributes[t_index][:vegetarian],
+    gluten_free: dish_attributes[t_index][:gluten_free],
+    bio: dish_attributes[t_index][:bio],
+    price: dish_attributes[t_index][:price]
     )
+
     dish_seed.user = user_seed
     dish_seed.save!
 
+    t_index += 1
+
     hour = [12, 20].sample
-    day = DateTime.now.day + (1..5).to_a.sample
-    #zone = DateTime.now.zone
+    date = DateTime.now + (0..5).to_a.sample.day
+    alea = 1 + rand(3)
 
-    availability_seed = Availability.new(
-      available_datetime: DateTime.new(2017, 02, day, hour, 0, 0),
-      portions: (1..5).to_a.sample
-    )
-
-    availability_seed.dish = dish_seed
-    availability_seed.save!
-
-    if rand < 0.3
-      availability_seed.portions > 1 ? p_mod =  1 : p_mod = 0
-
-      order_seed = Order.new(
-        portions: availability_seed.portions - p_mod,
-        review_description: Faker::Lorem.sentence(5),
-        review_rating: (1..5).to_a.sample
+    alea.times do
+      availability_seed = Availability.new(
+        available_datetime: DateTime.new(2017, date.month, date.day, hour, 0, 0),
+        portions: (1..4).to_a.sample
       )
 
-      order_seed.user = user_seed
-      order_seed.availability = availability_seed
-      order_seed.save!
+      availability_seed.dish = dish_seed
+      availability_seed.save!
+      date += 1.day
+
+        if rand < 0.5
+          order_seed = Order.new(
+            review_description: Faker::Lorem.sentence(5),
+            review_rating: (1..5).to_a.sample,
+            portions: availability_seed.portions.fdiv(2).round
+          )
+          order_seed.user = user_seed
+          order_seed.availability = availability_seed
+          order_seed.save!
+        end
     end
-  end
 end
+
+# more orders and reviews
+
