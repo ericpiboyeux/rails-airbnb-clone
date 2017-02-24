@@ -10,7 +10,7 @@ end
 def create
   @order = Order.new(order_params)
   @order.user = current_user
-  @dish = @order.availability.dish
+  @dish = Availability.find(params[:order][:availability_id]).dish
     if @order.save
       redirect_to orders_path
       # verifier la route exacte pour la redirection apres save order
