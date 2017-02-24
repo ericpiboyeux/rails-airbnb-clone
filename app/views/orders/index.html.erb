@@ -1,13 +1,17 @@
+<div class="alert alert-info alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    Votre commande est confirmée
+</div>
 <div class="container">
   <div class="row">
     <div class="col-xs-offset-2 col-xs-8">
-      <h2 class="text-center">commande confirmée</h2>
+      <h2 class="text-center">vos précédentes commandes</h2>
       <p>
         <% @orders.each do |order| %>
-        <%= order.availability.dish.name %>
           <ul>
             <li>
-              <%= order.portions %>
+              <%= "#{order.availability.available_datetime.strftime('%d/%m/%Y')} : #{order.availability.dish.name} (#{order.portions}) - " %>
+              <small><%= link_to "laisser une évaluation", root_path %></small>
             </li>
           </ul>
         <% end %>
@@ -15,3 +19,4 @@
     </div>
   </div>
 </div>
+
