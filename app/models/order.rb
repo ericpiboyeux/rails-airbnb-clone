@@ -4,3 +4,5 @@ class Order < ApplicationRecord
   validates :portions, presence: true
   validates :review_rating, inclusion: { in: 1..5}
 end
+
+

@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <h1 class="text-center">New Order</h1>
+
+      <%= simple_form_for(@order) do |f| %>
+        <%= f.input :portions, label: 'Add New order', required: true, collection: 1..5 %>
+        <%= f.input :review_description, label: 'Description' %>
+        <%= f.input :review_rating, label: 'Rating' %>
+        <%= f.button :submit, class: "btn btn-primary"  %>
+      <% end %>
+    </div>
+  </div>
+</div>
