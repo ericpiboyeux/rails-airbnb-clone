@@ -1,4 +1,5 @@
 @import "home";
+
 .chosen-availability {
   background-color: #85CFF7;
   width: 100%;
@@ -12,22 +13,33 @@
   background-color: #FF7B6E;
   border-color: #FF7B6E;
 }
-
-.main-content {
-  width: 60%;
-}
-
-.side-choice {
-  width: 30%;
-  border: solid 1px #616668;
-  padding: 5px;
-}
-
-.wrapper-show {
+ .show-card-wrapper {
   display: flex;
   align-items: center;
-  color: #616668;
-  font-size: 14px;
-  font-family: "Open Sans", "Helvetica", "sans-serif";
+ }
+
+.side-choice {
+  border: solid 1px #616668;
+  padding: 5px;
+  margin: auto;
+  text-align: center;
 }
 
+.main-content {
+  width: 55%;
+  height: 150px;
+}
+
+.dish_photo {
+  width: 250px;
+  height: auto;
+}
+
+.photo {
+  padding-left: 0;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: normal;
+}

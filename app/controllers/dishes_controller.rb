@@ -7,21 +7,8 @@ class DishesController < ApplicationController
     @searched_date = params[:search][:date]
     @searched_slot = params[:search][:slot]
     @searched_address = params[:search][:address]
-    @searched_portions = params[:search][:portions]
-    @searched_sentence = params[:search][:sentence]
-
-    # if @searched_address
-    #   @searched_coordinates = Geocoder.search(@searched_address).first
-    #   byebug
-    # end
-
-    if @searched_sentence.present?
-      searched_words = @searched_sentence.split(" ")
-      like_search = "%"
-      searched_words.each do |word|
-        like_search += "#{word}%"
-      end
-    end
+    @searched_portions = params[:search][:portions].to_i
+    @searched_types = params[:search][:types]
 
     if @searched_date.present?
       if @searched_slot == 'Midi'
@@ -33,18 +20,33 @@ class DishesController < ApplicationController
 
     @dishes = Dish.joins(:availabilities)
     @dishes = @dishes.where("availabilities.available_datetime = ? ", @datetime) if @datetime
-    @dishes =  @dishes.where("dishes.description LIKE ? ", like_search) if @searched_sentence.present?
     @dishes = @dishes.where("availabilities.left_portions >= ? ", @searched_portions) if @searched_portions.present?
+    @dishes = @dishes.where("dishes.bio = ? ", true) if @searched_types && @searched_types[0].present?
+    @dishes = @dishes.where("dishes.gluten_free = ? ", true) if @searched_types && @searched_types[1].present?
+    @dishes = @dishes.where("dishes.vegetarian = ? ", true) if @searched_types && @searched_types[2].present?
 
     @users = []
+    portions_results = []
     @dishes.each do |dish|
       @users <<  dish.user  if dish.user.latitude && dish.user.longitude
+      dish.availabilities.each do |availability|
+        portions_results << availability.left_portions if availability.left_portions > 0
+      end
     end
+    (portions_results.count > 1) ? @max_results_portions = portions_results.max : @max_results_portions =1
+
     @hash = Gmaps4rails.build_markers(@users) do |user, marker|
       marker.lat user.latitude
       marker.lng user.longitude
       # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
     end
+    # if @searched_address
+    #   @searched_coordinates = Geocoder.search(@searched_address).first
+    #   @searched_hash = Gmaps4rails.build_markers(@searched_coordinates) do |coord, marker|
+    #     marker.lat coord[:lat]
+    #     marker.lng coord[:lng]
+    #   end
+    # end
   end
 
   def show
