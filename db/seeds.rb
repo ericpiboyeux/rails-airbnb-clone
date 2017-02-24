@@ -113,46 +113,51 @@ dish_attributes = [
   user_seed.photo_url = user_photo_array[t_index]
   user_seed.save!
 
-    dish_seed = Dish.new(
-    name: dish_attributes[t_index][:name],
-    description: Faker::Lorem.sentence(4),
-    vegetarian: dish_attributes[t_index][:vegetarian],
-    gluten_free: dish_attributes[t_index][:gluten_free],
-    bio: dish_attributes[t_index][:bio],
-    price: dish_attributes[t_index][:price]
+  dish_seed = Dish.new(
+  name: dish_attributes[t_index][:name],
+  description: Faker::Lorem.sentence(4),
+  vegetarian: dish_attributes[t_index][:vegetarian],
+  gluten_free: dish_attributes[t_index][:gluten_free],
+  bio: dish_attributes[t_index][:bio],
+  price: dish_attributes[t_index][:price]
+  )
+
+  dish_seed.user = user_seed
+  dish_seed.save!
+
+  t_index += 1
+
+  hour = [12, 20].sample
+  date = DateTime.now + (0..5).to_a.sample.day
+  alea = 1 + rand(3)
+
+  alea.times do
+    availability_seed = Availability.new(
+      available_datetime: DateTime.new(2017, date.month, date.day, hour, 0, 0),
+      portions: (1..4).to_a.sample
     )
 
-    dish_seed.user = user_seed
-    dish_seed.save!
+    availability_seed.dish = dish_seed
+    availability_seed.left_portions = availability_seed.portions
+    availability_seed.save!
+    date += 1.day
 
-    t_index += 1
-
-    hour = [12, 20].sample
-    date = DateTime.now + (0..5).to_a.sample.day
-    alea = 1 + rand(3)
-
-    alea.times do
-      availability_seed = Availability.new(
-        available_datetime: DateTime.new(2017, date.month, date.day, hour, 0, 0),
-        portions: (1..4).to_a.sample
+    if rand < 0.5
+      portions_taken = availability_seed.portions.fdiv(2).round
+      order_seed = Order.new(
+        review_description: Faker::Lorem.sentence(5),
+        review_rating: (1..5).to_a.sample,
+        portions: portions_taken
       )
-
-      availability_seed.dish = dish_seed
+      order_seed.user = user_seed
+      order_seed.availability = availability_seed
+      order_seed.save!
+      availability_seed.left_portions -= portions_taken
       availability_seed.save!
-      date += 1.day
-
-        if rand < 0.5
-          order_seed = Order.new(
-            review_description: Faker::Lorem.sentence(5),
-            review_rating: (1..5).to_a.sample,
-            portions: availability_seed.portions.fdiv(2).round
-          )
-          order_seed.user = user_seed
-          order_seed.availability = availability_seed
-          order_seed.save!
-        end
     end
+  end
 end
+
 
 # more orders and reviews
 

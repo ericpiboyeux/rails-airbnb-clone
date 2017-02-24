@@ -1,5 +1,28 @@
 <div class="search-bar">
-  Date Jour Portions Type de Plat
+  <div class="container">
+    <div class="row form-home">
+      <%= simple_form_for :search, url: dishes_path, :method => :get, :class => "form-inline" do |f| %>
+        <div class="col-lg-2 form-group">
+          <%= f.input :date, input_html: {id: "mydatepicker", value: @searched_date}, required: false, label: false %>
+        </div>
+        <div class="col-lg-2 form-group">
+          <%= f.input :slot, collection: ["Midi", "Soir"], selected: @searched_slot, required: false, label: false %>
+        </div>
+        <div class="col-lg-2 form-group">
+          <%= f.input :address, as: :string, input_html: {id: "address", value: @searched_address}, required: false, autocomplete: "off", label: false, placeholder: "Address" %>
+        </div>
+        <div class="col-lg-2 form-group">
+          <%= f.input :portions, collection: 1..@max_results_portions, selected: @searched_portions || 1, label: false %>
+        </div>
+        <div class="col-lg-2 form-group">
+          <%= f.input :types, collection: ['Bio', 'Sans gluten', 'Végétarien'], selected: @searched_types, input_html: { }, label: false %>
+        </div>
+        <div class="col-lg-2 form-group">
+          <%= f.submit "Search", class: "btn btn-primary search-index" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <div class="container">
@@ -9,9 +32,9 @@
         <% @dishes.each do |dish|%>
           <div class="col-lg-6 col-xs-12">
 
-
             <%= link_to dish_path(dish.id) do %>
               <div class="card-result" style="background-image:url('http://res.cloudinary.com/erwannddlv/image/upload/v1487856985/soupe-thai_y590f6.jpg')">
+
                 <p> <%= dish.name %>
                 </p>
 
@@ -25,9 +48,7 @@
                     <i class="fa fa-star-o" aria-hidden="true"></i>
                   </div>
                 </div>
-                <div class="price-card">
-                  2€
-                </div>
+                <div class="price-card"><%= dish.price %> €</div>
               </div>
             <% end %>
           </div>
@@ -42,7 +63,7 @@
 </div>
 
 <% content_for(:after_js) do %>
-  <%= javascript_tag do %>
+  <script>
     $(document).ready(function() {
       var handler = Gmaps.build('Google');
       handler.buildMap({ internal: { id: 'map' } }, function() {
@@ -58,7 +79,7 @@
           handler.getMap().setZoom(16);
         }
       });
+      $("#mydatepicker").datepicker('setDate', '<%= @searched_date %>');
     });
-  <% end %>
+  </script>
 <% end %>
-

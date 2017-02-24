@@ -6,13 +6,17 @@ def index
   @orders = Order.all
 end
 
+def new
+  @order = Order.new
+end
+
 def create
   @order = Order.new(order_params)
     if @order.save
-      redirect_to orders_path(@order)
+      redirect_to order_index_path(@order)
       # verifier la route exacte pour la redirection apres save order
     else
-      render :new
+      render :index
     end
 
 end
@@ -25,7 +29,7 @@ private
   end
 
   def order_params
-    params.require(:order).permit(:portions)
+    params.require(:order).permit(:portions, :review_description, :review_rating, :user_id, :availability_id)
   end
 
 end
