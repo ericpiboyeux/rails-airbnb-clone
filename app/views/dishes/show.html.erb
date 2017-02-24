@@ -5,14 +5,17 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-8 show-card-wrapper">
-        <div class="show-card">
-          <%= cl_image_tag @dish.photo.path, class: "dish_photo" %>
+        <div class="show-card" style="background-image:url('<%= cl_image_path @dish.photo.path%>')">
+          <%= cl_image_tag @dish.user.photo.path, class: "dish-user-photo avatar-large" %>
           <%= "#{@dish.user.firstname} #{@dish.user.lastname[0]}. vous propose :" %>
-          <%= cl_image_tag @dish.user.photo.path, class: "dish-user-photo" %>
-          <%= @dish.name %>
-          <%= @dish.description %>
-          <%= @dish.price.to_s + " €" %>
-          <% if @dish.bio == true %>
+          <div class="dish-description">
+            <div class="dish-desc-mini">
+              <%= @dish.name %>
+              <%= @dish.description %>
+            </div>
+            <div class="price-card">
+            <%= @dish.price.to_s + " €" %>
+              <% if @dish.bio == true %>
             <span class="label label-success">Bio</span>
           <% end %>
 
@@ -22,8 +25,7 @@
           <% if @dish.vegetarian == true %>
             <span class="label label-success">Vegetarian</span>
           <% end %>
-          <div class="reviews">
-            reviews
+            </div>
           </div>
         </div>
       </div>
@@ -34,9 +36,6 @@
             <%= f.input :portions, collection: 1..@chosen.portions %>
             <%= f.button :submit, value: "Place order", class: "btn btn-primary"  %>
           <% end %>
-        </div>
-        <div>
-          <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=400x300&sensor=false&maptype=roadmap&markers=color:red|#{@dish.user.address}" %>
         </div>
       </div>
   </div>
