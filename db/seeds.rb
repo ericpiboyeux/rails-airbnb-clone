@@ -123,6 +123,7 @@ dish_attributes = [
   )
 
   dish_seed.user = user_seed
+  dish_seed.photo_url = dish_photo_array[t_index]
   dish_seed.save!
 
   t_index += 1
