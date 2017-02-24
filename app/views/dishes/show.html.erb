@@ -1,4 +1,4 @@
-<div class="chosen-availability">Selected slot : <%=@chosen_availability%></div>
+<div class="chosen-availability">Date sélectionnée : <%=@chosen_availability%></div>
 
 
 <div class="wrapper">
@@ -34,9 +34,20 @@
           <%= simple_form_for :order, url: orders_path, :method => :post do |f| %>
             <%= f.input :availability_id, as: :hidden, input_html: { value: @chosen.id } %>
             <%= f.input :portions, collection: 1..@chosen.portions %>
+            <h4><div id="order-amount"><%=@dish.price%> €</div></h4>
             <%= f.button :submit, value: "Place order", class: "btn btn-primary"  %>
           <% end %>
         </div>
       </div>
   </div>
 </div>
+<% content_for(:after_js) do %>
+  <script>
+    $('#order_portions').change(function (){
+      var portions = $('#order_portions option:selected').text();
+      var dprice = <%= @dish.price %>;
+      var amount = String(portions * dprice) + " €";
+      $("#order-amount").text(amount);
+    });
+  </script>
+<% end %>
