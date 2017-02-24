@@ -9,7 +9,7 @@
           <%= f.input :slot, collection: ["Midi", "Soir"], selected: @searched_slot, required: false, label: false %>
         </div>
         <div class="col-lg-2 form-group">
-          <%= f.input :address, as: :string, input_html: {id: "address", value: @searched_address}, required: false, autocomplete: "off", label: false %>
+          <%= f.input :address, as: :string, input_html: {id: "address", value: @searched_address}, required: false, autocomplete: "off", label: false, placeholder: "Address" %>
         </div>
         <div class="col-lg-2 form-group">
           <%= f.input :portions, collection: 1..@max_results_portions, selected: @searched_portions || 1, label: false %>
@@ -83,6 +83,3 @@
     });
   </script>
 <% end %>
-
-
-
