@@ -19,14 +19,19 @@
   z-index: 3000;
 }
 
-
 .search-bar {
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   height: 50px;
   margin-bottom: 20px;
+  padding-top: 7px;
+}
+.search-index {
+  margin-top: 0 !important;
+}
+.map {
+  height: 400px;
 }
 
-.map {
-
-  height: 400px;
+#address {
+  width: 80%;
 }
