@@ -18,6 +18,15 @@
   align-items: center;
  }
 
+ .show-card {
+  background-size: cover;
+  background-position: center center;
+  height: 400px;
+  width: 100%;
+  color: #fff;
+  padding: 10px;
+ }
+
 .side-choice {
   border: solid 1px #616668;
   padding: 5px;
@@ -33,6 +42,15 @@
 .dish_photo {
   width: 250px;
   height: auto;
+}
+
+.dish-description {
+  width: 80%;
+  position: absolute;
+  bottom: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
 }
 
 .photo {
