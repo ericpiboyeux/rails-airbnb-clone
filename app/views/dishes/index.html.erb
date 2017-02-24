@@ -33,7 +33,7 @@
           <div class="col-lg-6 col-xs-12">
 
 
-            <%= link_to dish_path(dish.id) do %>
+            <%= link_to dish_path(dish.id, shift: @datetime) do %>
               <div class="card-result">
                 <p> <%= dish.name %>
                 </p>
@@ -63,7 +63,7 @@
 </div>
 
 <% content_for(:after_js) do %>
-  <%= javascript_tag do %>
+  <script>
     $(document).ready(function() {
       var handler = Gmaps.build('Google');
       handler.buildMap({ internal: { id: 'map' } }, function() {
@@ -79,7 +79,7 @@
           handler.getMap().setZoom(16);
         }
       });
-      $("#mydatepicker").datepicker('setDate', <%= @searched_date %>);
+      $("#mydatepicker").datepicker('setDate', '<%= @searched_date %>');
     });
-  <% end %>
+  </script>
 <% end %>
