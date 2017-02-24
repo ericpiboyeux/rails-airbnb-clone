@@ -52,10 +52,18 @@ class DishesController < ApplicationController
   def show
     # @dish for TEST use only
     @dish = Dish.find(params[:id])
-    @chosen = Dish.find(params[:id]).availabilities.first
-    # replace it with => @dish = Dish.find(dish_params)
-    @chosen_availability = format_datetime(@chosen.available_datetime)
-    #@other = Dish.find(1).availabilities.to_a.delete(chosen)
+    # @chosen = Dish.find(params[:id]).availabilities.first
+
+    # # replace it with => @dish = Dish.find(dish_params)
+    # @chosen_availability = format_datetime(@chosen.available_datetime)
+    # #@other = Dish.find(1).availabilities.to_a.delete(chosen)
+
+    # récupérer la date choisie (+ heure du shift)
+    @chosen_shift = DateTime.parse(params["shift"])
+    # récupérer l'id de l'availablitytzgeufojze correspondante
+    @chosen = @dish.availabilities.find_by(available_datetime: @chosen_shift)
+
+    @chosen_availability = format_datetime(@chosen_shift)
   end
 
   def new

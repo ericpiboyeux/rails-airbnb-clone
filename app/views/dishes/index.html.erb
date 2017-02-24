@@ -2,23 +2,23 @@
   <div class="container">
     <div class="row form-home">
       <%= simple_form_for :search, url: dishes_path, :method => :get, :class => "form-inline" do |f| %>
-        <div class="col-lg-3 col-sm-6 form-group">
+        <div class="col-lg-2 form-group">
           <%= f.input :date, input_html: {id: "mydatepicker", value: @searched_date}, required: false, label: false %>
         </div>
-        <div class="col-lg-3 col-sm-6 form-group">
+        <div class="col-lg-2 form-group">
           <%= f.input :slot, collection: ["Midi", "Soir"], selected: @searched_slot, required: false, label: false %>
         </div>
-        <div class="col-lg-3 col-sm-6 form-group">
+        <div class="col-lg-2 form-group">
           <%= f.input :address, as: :string, input_html: {id: "address", value: @searched_address}, required: false, autocomplete: "off", label: false %>
         </div>
-        <div class="col-lg-3 col-sm-6 form-group">
+        <div class="col-lg-2 form-group">
           <%= f.input :portions, collection: 1..@max_results_portions, selected: @searched_portions || 1, label: false %>
         </div>
-        <div class="col-lg-3 col-sm-6 form-group">
-          <%= f.input :types, collection: ['Bio', 'Sans gluten', 'Végétarien'], selected: @searched_types, input_html: { multiple: true }, label: false %>
+        <div class="col-lg-2 form-group">
+          <%= f.input :types, collection: ['Bio', 'Sans gluten', 'Végétarien'], selected: @searched_types, input_html: { }, label: false %>
         </div>
-        <div class="col-lg-3 col-sm-6 form-group">
-          <%= f.submit "Search", class: "btn btn-primary" %>
+        <div class="col-lg-2 form-group">
+          <%= f.submit "Search", class: "btn btn-primary search-index" %>
         </div>
       <% end %>
     </div>
@@ -33,7 +33,7 @@
           <div class="col-lg-6 col-xs-12">
 
 
-            <%= link_to dish_path(dish.id) do %>
+            <%= link_to dish_path(dish.id, shift: @datetime) do %>
               <div class="card-result">
                 <p> <%= dish.name %>
                 </p>
@@ -63,7 +63,7 @@
 </div>
 
 <% content_for(:after_js) do %>
-  <%= javascript_tag do %>
+  <script>
     $(document).ready(function() {
       var handler = Gmaps.build('Google');
       handler.buildMap({ internal: { id: 'map' } }, function() {
@@ -79,9 +79,9 @@
           handler.getMap().setZoom(16);
         }
       });
-      $("#mydatepicker").datepicker('setDate', <%= @searched_date %>);
+      $("#mydatepicker").datepicker('setDate', '<%= @searched_date %>');
     });
-  <% end %>
+  </script>
 <% end %>
 
 
