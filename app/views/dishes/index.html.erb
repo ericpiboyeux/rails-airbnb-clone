@@ -31,7 +31,7 @@
       <div class="row">
         <% @dishes.each do |dish|%>
           <div class="col-lg-6 col-xs-12">
-            <%= link_to dish_path(dish.id) do %>
+            <%= link_to dish_path(dish.id, shift: @datetime) do %>
               <div class="card-result" style="background-image:url('<%= cl_image_path dish.photo.path%>')">
                 <div class="mini-profile">
                   <%= cl_image_tag dish.user.photo.path, class: "avatar-large" %>

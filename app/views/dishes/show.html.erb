@@ -6,10 +6,12 @@
     <div class="row">
       <div class="col-xs-8 show-card-wrapper">
         <div class="show-card">
-          <%=image_tag "dish_photo", class: "dish_photo" %>
+          <%= cl_image_tag @dish.photo.path, class: "dish_photo" %>
+          <%= "#{@dish.user.firstname} #{@dish.user.lastname[0]}. vous propose :" %>
+          <%= cl_image_tag @dish.user.photo.path, class: "dish-user-photo" %>
           <%= @dish.name %>
           <%= @dish.description %>
-          <!--<%= @dish.price %>--> 5€
+          <%= @dish.price.to_s + " €" %>
           <% if @dish.bio == true %>
             <span class="label label-success">Bio</span>
           <% end %>
