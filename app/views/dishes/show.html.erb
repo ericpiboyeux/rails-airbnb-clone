@@ -11,7 +11,7 @@
           <%= cl_image_tag @dish.user.photo.path, class: "dish-user-photo" %>
           <%= @dish.name %>
           <%= @dish.description %>
-          <%= @dish.price + " €" %>
+          <%= @dish.price.to_s + " €" %>
           <% if @dish.bio == true %>
               <span class="label label-success">Bio</span>
           <% end %>
