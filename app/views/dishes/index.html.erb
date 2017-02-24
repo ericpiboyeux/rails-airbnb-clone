@@ -33,12 +33,13 @@
           <div class="col-lg-6 col-xs-12">
 
             <%= link_to dish_path(dish.id, shift: @datetime) do %>
-              <div class="card-result">
+              <div class="card-result" style="background-image:url('<%= cl_image_path dish.photo.path%>')">
+
                 <p> <%= dish.name %>
                 </p>
 
                 <div class="mini-profile">
-                  <img src="https://avatars0.githubusercontent.com/u/15861461?v=3&s=400" class="avatar-large">
+                  <%= cl_image_tag dish.user.photo.path, class: "avatar-large" %>
                   <div class="rating">
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
