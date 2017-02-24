@@ -30,7 +30,7 @@
       <div class="col-xs-4">
         <div class="side-choice">
           <%= simple_form_for :order, url: orders_path, :method => :post do |f| %>
-            <%= f.input :availability_id, collection: @dish.availabilities, selected: @chosen, as: :hidden %>
+            <%= f.input :availability_id, as: :hidden, input_html: { value: @chosen.id } %>
             <%= f.input :portions, collection: 1..@chosen.portions %>
             <%= f.button :submit, value: "Place order", class: "btn btn-primary"  %>
           <% end %>

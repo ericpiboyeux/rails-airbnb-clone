@@ -9,6 +9,7 @@ end
 
 def create
   @order = Order.new(order_params)
+  @order.user = current_user
   @dish = @order.availability.dish
     if @order.save
       redirect_to orders_path
@@ -16,7 +17,6 @@ def create
     else
       render 'dishes/show'
     end
-
 end
 
 

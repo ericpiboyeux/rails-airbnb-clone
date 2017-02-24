@@ -62,7 +62,6 @@ class DishesController < ApplicationController
     @chosen_shift = DateTime.parse(params["shift"])
     # récupérer l'id de l'availablitytzgeufojze correspondante
     @chosen = @dish.availabilities.find_by(available_datetime: @chosen_shift)
-
     @chosen_availability = format_datetime(@chosen_shift)
   end
 
