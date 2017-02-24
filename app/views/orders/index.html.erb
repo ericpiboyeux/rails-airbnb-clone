@@ -1,3 +1,17 @@
-<% @orders.each do |order| %>
-  <%= order.review_rating %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-offset-2 col-xs-8">
+      <h2 class="text-center">commande confirmée</h2>
+      <p>
+        <% @orders.each do |order| %>
+        <%= order.availability.dish.name %>
+          <ul>
+            <li>
+              <%= order.portions %>
+            </li>
+          </ul>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>
